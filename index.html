@@ -1,491 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio - Praveen Yadav</title>
-<style>
-  :root {
-    /* Colors */
-    --color-bg: #ffffff;
-    --color-text: #374151;
-    --color-text-muted: #6b7280;
-    --color-primary: #111827;
-    --color-primary-hover: #1f2937;
-    --color-btn-bg: #111827;
-    --color-btn-text: #ffffff;
-    --color-card-bg: #f9fafb;
-    --color-shadow: rgba(0, 0, 0, 0.05);
-
-    /* Typography */
-    --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-    /* Spacing */
-    --spacing-section-vertical: 4rem;
-    --spacing-container-padding: 1.25rem; /* 20px */
-    --border-radius: 0.75rem;
-    --transition-duration: 0.3s;
-  }
-
-  /* Google font import */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
-
-  /* Reset and base */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: var(--font-sans);
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.6;
-    min-height: 100vh;
-    scroll-behavior: smooth;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--spacing-container-padding);
-    padding-right: var(--spacing-container-padding);
-  }
-
-  /* Sticky header */
-  header {
-    position: sticky;
-    top: 0;
-    background-color: var(--color-bg);
-    box-shadow: 0 1px 6px var(--color-shadow);
-    z-index: 1000;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.5rem;
-  }
-  .logo {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    user-select: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-  .nav-links a {
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    padding: 0.25rem 0;
-    color: var(--color-text-muted);
-    transition: color var(--transition-duration);
-  }
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--color-primary);
-  }
-  .nav-links a.active::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--color-primary);
-    border-radius: 2px;
-  }
-
-  /* Hero Section */
-  .hero {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    text-align: center;
-  }
-  .hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin: 0 0 1rem 0;
-    color: var(--color-primary);
-  }
-  .hero p {
-    font-weight: 500;
-    color: var(--color-text-muted);
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2.5rem;
-  }
-  .btn-primary {
-    background-color: var(--color-btn-bg);
-    color: var(--color-btn-text);
-    font-weight: 600;
-    font-size: 1.125rem;
-    padding: 0.75rem 2.5rem;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color var(--transition-duration), transform var(--transition-duration);
-    box-shadow: 0 4px 8px rgba(17,24,39,0.2);
-  }
-  .btn-primary:hover,
-  .btn-primary:focus {
-    background-color: var(--color-primary-hover);
-    transform: scale(1.05);
-    outline: none;
-  }
-
-  /* Section base styles */
-  section {
-    padding-top: var(--spacing-section-vertical);
-    padding-bottom: var(--spacing-section-vertical);
-  }
-  section h2 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  /* About Section */
-  #about .content {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    text-align: center;
-  }
-
-  /* Skills Section */
-  #skills .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1.5rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .skill-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 1px 6px var(--color-shadow);
-    padding: 1.5rem 1rem;
-    text-align: center;
-    font-weight: 600;
-    color: var(--color-primary);
-    transition: box-shadow var(--transition-duration), transform var(--transition-duration);
-    cursor: default;
-  }
-  .skill-card:hover {
-    box-shadow: 0 6px 20px rgba(17,24,39,0.15);
-    transform: translateY(-4px);
-  }
-
-  /* Projects Section */
-  #projects .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-  .project-card {
-    background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 1px 10px var(--color-shadow);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: box-shadow var(--transition-duration), transform var(--transition-duration);
-  }
-  .project-card:hover {
-    box-shadow: 0 10px 30px rgba(17,24,39,0.2);
-    transform: translateY(-6px);
-  }
-  .project-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-  }
-  .project-content {
-    flex-grow: 1;
-    padding: 1rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-title {
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin: 0 0 0.5rem;
-    color: var(--color-primary);
-  }
-  .project-desc {
-    flex-grow: 1;
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    margin-bottom: 1rem;
-  }
-  .project-links {
-    margin-top: auto;
-  }
-  .project-links a {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--color-primary);
-    margin-right: 1.25rem;
-    transition: color var(--transition-duration);
-  }
-  .project-links a:hover,
-  .project-links a:focus {
-    color: var(--color-btn-bg);
-    outline: none;
-  }
-
-  /* Contact Section */
-  #contact .contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  #contact label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-  }
-  #contact input, 
-  #contact textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: var(--border-radius);
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    color: var(--color-text);
-    resize: vertical;
-    transition: border-color var(--transition-duration);
-  }
-  #contact input:focus,
-  #contact textarea:focus {
-    outline: none;
-    border-color: var(--color-btn-bg);
-    box-shadow: 0 0 8px rgba(17,24,39,0.3);
-  }
-  #contact button {
-    margin-top: 1.25rem;
-    padding: 0.75rem 2.25rem;
-    border: none;
-    border-radius: var(--border-radius);
-    background-color: var(--color-btn-bg);
-    color: var(--color-btn-text);
-    font-weight: 600;
-    font-size: 1.125rem;
-    cursor: pointer;
-    transition: background-color var(--transition-duration), transform var(--transition-duration);
-  }
-  #contact button:hover,
-  #contact button:focus {
-    background-color: var(--color-primary-hover);
-    transform: scale(1.05);
-    outline: none;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-
-  @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-    .btn-primary {
-      width: 100%;
-      padding: 1rem 0;
-    }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="resources/icon.jpg" type="image"/>
+    <title>Portfolio||Praveen||Computer Science Student</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="container">
-    <nav aria-label="Primary navigation">
-      <div class="logo" tabindex="0">Praveen Yadav</div>
-      <div class="nav-links" role="list">
-        <a href="#about" role="listitem" class="active">About</a>
-        <a href="#skills" role="listitem">Skills</a>
-        <a href="#projects" role="listitem">Projects</a>
-        <a href="#contact" role="listitem">Contact</a>
-      </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Portfolio</div>
+            <div class="nav-menu" id="navMenu">
+                <button class="nav-item active" data-page="1">Home</button>
+                <button class="nav-item" data-page="2">Projects</button>
+                <button class="nav-item" data-page="3">Experience</button>
+                <button class="nav-item" data-page="4">Skills</button>
+                <button class="nav-item" data-page="5">Academic</button>
+                <button class="nav-item" data-page="6">Visits</button>
+                <button class="nav-item" data-page="7">Future 1-2Y</button>
+                <button class="nav-item" data-page="8">Future 2-3Y</button>
+                <button class="nav-item" data-page="9">Contact</button>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </nav>
-  </div>
-</header>
 
-<main>
-  <section class="hero container" id="hero" aria-label="Introduction/hero">
-    <h1>Build Your Future with Code</h1>
-    <p>I'm a passionate Computer Science Engineer creating elegant solutions with modern  technologies.</p>
-    <button class="btn-primary" onclick="scrollToSection('contact')">Get In Touch</button>
-  </section>
+    <!-- Main Content Container -->
+    <main class="main-content"> <!--
+        <div class="main-content" id="mainContent">
+          <section id="page-1"> ... </section>
+          <section id="page-2"> ... </section>
+          <section id="page-3"> ... </section>
+          <section id="page-4"> ... </section>
+          <section id="page-5"> ... </section>
+          <section id="page-6"> ... </section>
+          <section id="page-7"> ... </section>
+          <section id="page-8"> ... </section>
+          <section id="page-9"> ... </section>
+        -->
+  <!-- More pages/sections -->
+       </div>
 
-  <section id="about" aria-labelledby="about-title" class="container">
-    <h2 id="about-title">About Me</h2>
-    <div class="content">
-      <p>Hello! I am also full-stack developer specializing in building (and occasionally designing) exceptional digital experiences. I love crafting clean and user-friendly websites and applications that solve real problems.</p>
-    </div>
-  </section>
+        
+        <!-- Page 1: Home/Introduction -->
+        <section class="page active" id="page-1">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="column">
+                        <div class="photo-placeholder">
+                            <div class="photo-frame">
+                                <div class="photo-content">
+                                    <div class="photo-icon"><img src="resources/icon.jpg" alt="profile img"
+                                        class="starting-video" loading="lazy"></div>
+                                    <p>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="intro-content">
+                            <h1 class="name-title">Praveen Kumar</h1>
+                            <h2 class="professional-title">Computer Science Student</h2>
+                            <div class="intro-text">
+                                <p>Welcome to my portfolio! I'm a passionate B.Tech Computer Science student with a keen interest in cybersecurity, robotics, and software development.</p>
+                                <p>Currently in my 3rd year at Ramgarh Engineering College, I've been actively involved in various projects ranging from IoT security systems to autonomous navigation technologies.</p>
+                                <p>I believe in continuous learning and applying theoretical knowledge to solve real-world problems through innovative technology solutions.</p>
+                            </div>
+                            <div class="intro-highlights">
+                                <div class="highlight-item">
+                                    <strong>Specialization:</strong> Embedded C , CPP, RUST
+                                </div>
+                                <div class="highlight-item">
+                                    <strong>Current Focus:</strong>Programming &  Development 
+                                </div>
+                                <div class="highlight-item">
+                                    <strong>Goal:</strong> Being perfect in my All interested domains:Programming &  Devlopment , AI & Machine Learning ,Cybersecurity ,Hardware & IoT ,Robotics & Control ,Research & Publishing , System Integration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="skills" aria-labelledby="skills-title" class="container">
-    <h2 id="skills-title">Skills</h2>
-    <div class="skills-grid" role="list">
-      <div class="skill-card" role="listitem" tabindex="0">JavaScript</div>
-      <div class="skill-card" role="listitem" tabindex="0">CSS/HTML</div>
-      <div class="skill-card" role="listitem" tabindex="0">Django</div>
-      <div class="skill-card" role="listitem" tabindex="0">MYSQL</div>
-      <div class="skill-card" role="listitem" tabindex="0">Pytorch</div>
-      <div class="skill-card" role="listitem" tabindex="0">scikit-learn</div>
-       <div class="skill-card" role="listitem" tabindex="0">nltk/Scipy</div>
-    </div>
-  </section>
+        <!-- Page 2: Projects -->
+        <section class="page" id="page-2">
+            <div class="container">
+                <h1 class="page-title">Projects Portfolio</h1>
+                <div class="two-column-layout">
+                    <div class="column">
+                        <h2 class="section-title">Completed Projects</h2>
+                        <div class="projects-list">
+                            <div class="project-card">
+                                <h3>update soon within 1 week</h3>
+                               <!-- <p>IoT-based security monitoring system using sensors and camera integration</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Arduino</span>
+                                    <span class="tech-tag">OpenCV</span>
+                                    <span class="tech-tag">MySQL</span>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Student Management Portal</h3>
+                                <p>Web-based system for managing student records and academic information</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">PHP</span>
+                                    <span class="tech-tag">MySQL</span>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <h3>Network Packet Analyzer</h3>
+                                <p>Tool for analyzing network traffic and detecting security vulnerabilities</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Wireshark</span>
+                                    <span class="tech-tag">TCP/IP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="column">  <
+                        <h2 class="section-title">Work in Progress</h2>
+                        <div class="projects-list">
+                            <div class="project-card work-in-progress">
+                               <!--  <h3>Autonomous Drone Navigation</h3>
+                               <p>ROS2-based autonomous navigation system for drones using computer vision</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">ROS2</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">OpenCV</span>
+                                    <span class="tech-tag">ArduPilot</span>
+                                </div>
+                                <div class="progress-indicator">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 70%;"></div>
+                                    </div>
+                                    <span class="progress-text">70% Complete</span>
+                                </div>
+                            </div>
+                            <div class="project-card work-in-progress">
+                                <h3>Cybersecurity Dashboard</h3>
+                                <p>Real-time monitoring dashboard for network security analysis</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                </div>
+                                <div class="progress-indicator">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 45%;"></div>
+                                    </div>
+                                    <span class="progress-text">45% Complete</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="projects" aria-labelledby="projects-title" class="container">
-    <h2 id="projects-title">Projects</h2>
-    <div class="projects-grid">
-      <article class="project-card" tabindex="0">
-        <img class="project-image" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Project Thumbnail: Task Manager App" />
-        <div class="project-content">
-          <h3 class="project-title">Task Manager App</h3>
-          <p class="project-desc">A sleek and simple task management app to organize your daily work and to-dos.</p>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
-          </div>
-        </div>
-      </article>
+        <!-- Page 3: Experience & Competitions -->
+        <section class="page" id="page-3">
+            <div class="container">
+                <h1 class="page-title">Experience & Achievements</h1>
+                <div class="two-column-layout">
+                    <div class="column">
+                        <h2 class="section-title">Professional Experience</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Marketing Lead</h3>
+                                    <div class="timeline-org">College Standards Club</div>
+                                    <div class="timeline-period">jully 2025-Present</div>
+                                    <p>Leading team projects in autonomous systems and robot programming</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h3>Intern Developer</h3>
+                                    <div class="timeline-org">Intenpe</div>
+                                    <div class="timeline-period">Summer 2024</div>
+                                    <p>predicted result with data in ai/ml and gained industry experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h2 class="section-title">Competitions & Hackathons</h2>
+                        <div class="achievements-list">
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🏆</div>
+                                <!--<div class="achievement-content">
+                                    <h3>National Cybersecurity Challenge</h3>
+                                    <div class="achievement-year">2024</div>
+                                    <div class="achievement-result">Top 50 Finalist</div>
+                                </div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🥇</div>
+                                <div class="achievement-content">
+                                    <h3>Smart India Hackathon</h3>
+                                    <div class="achievement-year">2023</div>
+                                    <div class="achievement-result">Regional Winner</div>
+                                </div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🥈</div>
+                                <div class="achievement-content">
+                                    <h3>IEEE Robotics Competition</h3>
+                                    <div class="achievement-year">2023</div>
+                                    <div class="achievement-result">2nd Place</div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <article class="project-card" tabindex="0">
-        <img class="project-image" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Project Thumbnail: Portfolio Website" />
-        <div class="project-content">
-          <h3 class="project-title">Portfolio Website</h3>
-          <p class="project-desc">My personal portfolio showcasing projects, skills, and contact information.</p>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
-          </div>
-        </div>
-      </article>
+        <!-- Page 4: Skills -->
+        <section class="page" id="page-4">
+            <div class="container">
+                <h1 class="page-title">Technical Skills</h1>
+                <div class="two-column-layout">
+                    <div class="column">
+                        <h2 class="section-title">Developed Skills</h2>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Java</span>
+                                    <span class="skill-percentage">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">C/C++</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML/CSS</span>
+                                    <span class="skill-percentage">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-percentage">45%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <span class="skill-percentage">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h2 class="section-title">Skills in Development</h2>
+                        <div class="skills-list">
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">Programming and Development</span>
+                                    <span class="skill-percentage">40%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">AI & Machine Learning</span>
+                                    <span class="skill-percentage">35%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 35%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">Cybersecurity</span>
+                                    <span class="skill-percentage">50%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 50%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">Hardware & IoT</span>
+                                    <span class="skill-percentage">07%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 07%;"></div>
+                                </div>
+                            </div>
 
-      <article class="project-card" tabindex="0">
-        <img class="project-image" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Project Thumbnail: E-commerce Store" />
-        <div class="project-content">
-          <h3 class="project-title">E-commerce Store</h3>
-          <p class="project-desc">An online store built with React and Node to provide seamless shopping experience.</p>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">Robotics & Control </span>
+                                    <span class="skill-percentage">14%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 14%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item developing">
+                                <div class="skill-info">
+                                    <span class="skill-name">System Integration</span>
+                                    <span class="skill-percentage">4%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress developing-progress" style="width: 4%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="contact" aria-labelledby="contact-title" class="container">
-    <h2 id="contact-title">Contact Me</h2>
-    <form class="contact-form" onsubmit="return handleSubmit(event)" novalidate>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your full name" required minlength="2" />
+        <!-- Page 5: Academic Information & Conclusion -->
+        <section class="page" id="page-5">
+            <div class="container">
+                <h1 class="page-title">Academic Background & Objectives</h1>
+                <div class="academic-content">
+                    <div class="academic-info">
+                        <div class="degree-section">
+                            <h2>Current Education</h2>
+                            <div class="degree-details">
+                                <h3>B.Tech Computer Science & Engineering</h3>
+                                <div class="university-info">
+                                    <p><strong>College:</strong> Ramgarh Engineering CollegeS</p>
+                                    <p><strong>Duration:</strong> 2023-2027</p>
+                                    <p><strong>Current GPA:</strong> 5.0/10 (not final first year cgpa, due to back || Second year not published) </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="courses-section">
+                            <h2>Relevant Coursework</h2>
+                            <div class="courses-grid">
+                                <div class="course-item">Data Structures & Algorithms</div>
+                                <div class="course-item">Operating Systems</div>
+                                <div class="course-item">Computer Networks</div>
+                                <div class="course-item">Database Management Systems</div>
+                                <div class="course-item">Advanced Programming practices</div>
+                                <div class="course-item">Design & Analysis of Algorithms</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="conclusion-section">
+                        <h2>Career Objectives & Personal Statement</h2>
+                        <div class="conclusion-content">
+                            <p>I started my computer science journey with the excitement to explore every new field—biotechnology, machine learning, data science, quantum computing, and emerging tech always attracted me. In my first year, I jumped into many domains, often beyond my college syllabus. Because of this, my academic performance dropped, and I struggled with doubt and isolation.</p>
+                            
+                            <p>But by my 4th semester, I realized that falling is part of learning. I learned to pick myself up, accept my responsibilities, and work with new motivation toward my life’s purpose.</p>
+                            
+                            <p>I am committed to building my future in computer science by applying skills gained from coursework, hackathons, and projects. I focus on programming, system design, and problem-solving, valuing teamwork, innovation, and continuous learning. My key interests include Programming, AI & Machine Learning, Cybersecurity, Hardware & IoT, and Robotics. I aim to contribute to research, publishing, and system integration, making meaningful impacts in advanced technology fields.</p>
+                            
+                            <div class="objectives-list">
+                                <h3>Key Objectives:</h3>
+                                <ul>
+                                    <li>Excel in programming, system design, and problem-solving</li>
+                                    <li>Advance knowledge and skills in AI, Machine Learning, and Cybersecurity</li>
+                                    <li>Develop innovative solutions in Hardware, IoT, and Robotics</li>
+                                    <li>Contribute to research and publish findings in cutting-edge technology</li>
+                                    <li>Integrate complex systems for intelligent automation and control</li>
+                                    <li>Foster collaboration and continuous learning within tech communities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="name@example.com" required />
+        <!-- Page 6: Visit Counter -->
+        <section class="page" id="page-6">
+            <div class="container">
+                <div class="visit-counter-container">
+                    <h1 class="page-title">Portfolio Visits</h1>
+                    <div class="counter-display">
+                        <div class="counter-icon">👁️</div>
+                        <div class="counter-content">
+                            <h2>Total Portfolio Visits</h2>
+                            <div class="visit-count" id="visitCount">Loading...</div>
+                            <p class="counter-description">Thank you for visiting my portfolio!</p>
+                        </div>
+                    </div>
+                    <div class="counter-actions">
+                        <button class="btn btn--secondary" id="resetCounter">Reset Counter</button>
+                        <p class="reset-note">Reset button for demo purposes only</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required minlength="10"></textarea>
+        <!-- Page 7: Future Plans (1-2 Years) -->
+        <section class="page" id="page-7">
+            <div class="container">
+                <h1 class="page-title">Future Plans - Next 1-2 Years</h1>
+                <div class="future-plans-container">
+                    <div class="plans-timeline">
+                        <div class="timeline-item future-plan">
+                            <div class="timeline-marker future-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Complete B.Tech degree with honors</h3>
+                                <div class="timeline-period">2025-2026</div>
+                                <p>Focus on maintaining  GPA while specializing in Programming & Development coursework. Complete capstone project in my domains.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan">
+                            <div class="timeline-marker future-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Secure internship at top tech company</h3>
+                                <div class="timeline-period">Summer 2025</div>
+                                <p>Target internships at tech companies . Gain hands-on experience in production systems and enterprise security.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan">
+                            <div class="timeline-marker future-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Develop expertise in cybersecurity</h3>
+                                <div class="timeline-period">2025-2026</div>
+                                <p>Pursue industry certifications like CISSP or CEH. Participate in bug bounty programs and contribute to security research. i think allready know many thing due to learning cyberwarfare (enough for me).</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan">
+                            <div class="timeline-marker future-marker"></div>
+                            <div class="timeline-content">
+                                <h3>learn Krav Maga ( A martial arts) </h3>
+                                <div class="timeline-period">2026</div>
+                                <p>Krav Maga is a highly effective Israeli self-defense and hand-to-hand combat system originally developed for the Israel Defense Forces. </p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan">
+                            <div class="timeline-marker future-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Contribute to open source projects</h3>
+                                <div class="timeline-period">Ongoing</div>
+                                <p>Actively contribute to robotics and security open source projects. Build reputation in developer communities and give back to the ecosystem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-</main>
+        <!-- Page 8: Future Plans (2-3 Years) -->
+        <section class="page" id="page-8">
+            <div class="container">
+                <h1 class="page-title">Long-term Vision - 2-3 Years</h1>
+                <div class="future-plans-container">
+                    <div class="plans-timeline">
+                        <div class="timeline-item future-plan long-term">
+                            <div class="timeline-marker future-marker-long"></div>
+                            <div class="timeline-content">
+                                <h3>Pursue Masters in Computer Science & Automation</h3>
+                                <div class="timeline-period">2026-2028</div>
+                                <p>Enroll in a prestigious graduate program focusing on autonomous systems security. Conduct research in robot security frameworks and publish papers.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan long-term">
+                            <div class="timeline-marker future-marker-long"></div>
+                            <div class="timeline-content">
+                                <h3>Build successful tech company</h3>
+                                <div class="timeline-period">2027-2029</div>
+                                <p>Scale robotics software startup into a profitable company. Develop innovative security solutions for autonomous vehicles and industrial robots.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan long-term">
+                            <div class="timeline-marker future-marker-long"></div>
+                            <div class="timeline-content">
+                                <h3>Become recognized expert in field</h3>
+                                <div class="timeline-period">2028-2029</div>
+                                <p>Establish thought leadership in robotics security. Speak at international conferences and contribute to industry standards and best practices.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan long-term">
+                            <div class="timeline-marker future-marker-long"></div>
+                            <div class="timeline-content">
+                                <h3>Mentor upcoming developers</h3>
+                                <div class="timeline-period">Ongoing</div>
+                                <p>Create educational content, teach workshops, and mentor students. Build a community around secure robotics development and knowledge sharing.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item future-plan long-term">
+                            <div class="timeline-marker future-marker-long"></div>
+                            <div class="timeline-content">
+                                <h3>Contribute to research publications</h3>
+                                <div class="timeline-period">2027-2029</div>
+                                <p>Publish research papers on robotics security in top-tier journals. Collaborate with academic institutions and contribute to the scientific community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<footer>
-  &copy; 2024 Your Name. All rights reserved.
-</footer>
+        <!-- Page 9: Contact -->
+        <section class="page" id="page-9">
+            <div class="container">
+                <h1 class="page-title">Contact Me</h1>
+                <div class="two-column-layout">
+                    <div class="column">
+                        <div class="contact-form-section">
+                            <h2>Send Message</h2>
+                            <form class="contact-form" id="contactForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Full Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="subject">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="message">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="contact-info-section">
+                            <h2>Contact Information</h2>
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <div class="contact-icon">📧</div>
+                                    <div class="contact-content">
+                                        <h4>Email</h4>
+                                        <p>kpraveen206@yahoo.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">📱</div>
+                                    <div class="contact-content">
+                                        <h4>Phone</h4>
+                                        <p>+91 91024 44374</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">📍</div>
+                                    <div class="contact-content">
+                                        <h4>Location</h4>
+                                        <p>Garhwa, Jharkhand, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="social-links">
+                                <h3>Connect with me</h3>
+                                <div class="social-buttons">
+                                    <a href="www.linkedin.com/in/praveen-kumar-2955a12a4" class="social-link" target="linkedin">
+                                        <span class="social-icon">🔗</span>
+                                        LinkedIn
+                                    </a>
+                                    <a href="https://github.com/SHREE-PRAVEEN" class="social-link" target="github">
+                                        <span class="social-icon">🐙</span>
+                                        GitHub
+                                    </a>
+                                    <a href="https://x.com/p_rav_ee_n1082" class="social-link" target="x.com">
+                                        <span class="social-icon">🐦</span>
+                                        Twitter
+                                    </a>
+                                </div>
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<script>
-  // Smooth scroll to section by ID
-  function scrollToSection(id) {
-    const section = document.getElementById(id);
-    if(section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  // Handle active link highlighting on scroll
-  const sectionIds = ['about', 'skills', 'projects', 'contact'];
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  function onScroll() {
-    const scrollPos = window.scrollY + window.innerHeight/3;
-    let current = 'about';
-
-    for (const id of sectionIds) {
-      const section = document.getElementById(id);
-      if (section.offsetTop <= scrollPos) {
-        current = id;
-      }
-    }
-
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-    });
-  }
-
-  window.addEventListener('scroll', onScroll);
-  onScroll();
-
-  // Form submission handler
-  function handleSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-
-    if (name.length < 2) {
-      alert('Please enter a valid name (at least 2 characters).');
-      form.name.focus();
-      return false;
-    }
-    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    if (!emailPattern.test(email)) {
-      alert('Please enter a valid email address.');
-      form.email.focus();
-      return false;
-    }
-    if (message.length < 10) {
-      alert('Please enter a message of at least 10 characters.');
-      form.message.focus();
-      return false;
-    }
-
-    // Simple fake sending simulation
-    alert('Thank you for your message! I will get back to you soon.');
-
-    form.reset();
-    return false;
-  }
-</script>
+    <script src="app.js"></script>
 </body>
 </html>
-
