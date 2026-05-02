@@ -1503,8 +1503,8 @@ select.form-control {
   }
 
   .photo-frame {
-    width: 240px;
-    height: 300px;
+    width: 576px;
+    height: 1200px;
   }
 
   .counter-display {
