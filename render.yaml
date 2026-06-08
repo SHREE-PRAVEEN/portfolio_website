@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: portfolio-website
+    runtime: rust
+    buildCommand: cargo build --release
+    startCommand: ./target/release/portfolio_website
